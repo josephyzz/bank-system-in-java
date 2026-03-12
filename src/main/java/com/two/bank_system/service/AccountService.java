@@ -4,13 +4,26 @@ import org.springframework.stereotype.Service;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import com.two.bank_system.domain.Account;
+import com.two.bank_system.repository.AccountRepository;
 
 @Service
 public class AccountService {
-
-    public String getAccount() {
-        return "Hello Accounts";
+    private final AccountRepository accountRepository;
+    
+    public AccountService(AccountRepository accountRepository){
+        this.accountRepository = accountRepository;
     }
+
+    public String getAccountByEmail(@RequestParam String userEmail) {
+            Account account = accountRepository.findAccountByEmail(userEmail);
+        return "Your Account:\n" +
+           "Number: " + account.getAccountNumber() + "\n" +
+           "Name: " + account.getName() + "\n" +
+           "CPF: " + account.getCpf() + "\n" +
+           "Balance: " + account.getBalance() + "\n" +
+           "Email: " + account.getUserEmail();
+    }
+
     public String createAccount(@RequestParam String name, @RequestParam Integer cpf, @RequestParam String userEmail) {
         Account account = new Account(name, cpf, userEmail);
         return "Account Created: " + account.getName() + " with CPF: " + account.getCpf();
@@ -19,6 +32,7 @@ public class AccountService {
     public String addBalance(@RequestParam Integer accountNumber, @RequestParam double amount) {
         // Alguma forma de encontrar a conta pelo número, tava pensando em usar um for loop mas acredito que para um banco com muitos usuários isso seria muito ineficiente, podemos dar uma olhada nisso quando você fizer o banco de dados.
         // account.setBalance(account.getBalance() + amount);
+        //Veja o que fiz no metodo getAccountByEmail
         return "Balance added: " + amount + " to account number: " + accountNumber;
     }
 
