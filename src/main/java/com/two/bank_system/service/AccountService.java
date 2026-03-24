@@ -8,6 +8,13 @@ import com.two.bank_system.domain.Account;
 @Service
 public class AccountService {
 
+    private final AccountRepository accountRepository;
+    
+    // Dependency Injection, entrega um repo pronto para uso.
+    public AccountService(AccountRepository accountRepository){
+        this.accountRepository = accountRepository;
+    }
+
     public String getAccount() {
         return "Hello Accounts";
     }

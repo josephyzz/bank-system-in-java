@@ -1,5 +1,11 @@
 package com.two.bank_system.domain;
 
+import com.two.bank_system.domain.User;
+import jakarta.persistence.Entity;
+import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.GenerationType;
+import jakarta.persistence.Id;
+
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.Setter;
