@@ -5,6 +5,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.RequestParam;
 
 import com.two.bank_system.service.AccountService;
 
@@ -17,8 +18,8 @@ public class AccountController {
 
     // GET - '/accounts'
     @GetMapping
-    public String getAccount() {
-        return accountService.getAccount();
+    public String getAccountByEmail(@RequestParam String userEmail) {
+        return accountService.getAccountByEmail(userEmail);
     }
 
     // POST - '/accounts'
