@@ -1,7 +1,7 @@
-package com.two.bank_system.domain;
+package com.two.bank_system;
 
 public enum AccountStatus {
-    ACTIVE,
-    BLOCKED,
-    CLOSED
+  ACTIVE,
+  BLOCKED,
+  CLOSED
 }

@@ -9,22 +9,21 @@ import org.springframework.web.bind.annotation.RequestParam;
 
 import com.two.bank_system.service.UserService;
 
-
 @RestController
 @RequestMapping("/user")
 public class UserController {
-    @Autowired
-    private UserService userService;
+  @Autowired
+  private UserService userService;
 
-    // GET - '/accounts'
-    @GetMapping
-    public String getAccountByEmail(@RequestParam String email) {
-        return userService.getUserByEmail(email);
-    }
+  // GET - '/accounts'
+  @GetMapping
+  public String geUserByEmail(@RequestParam String email) {
+    return userService.getUserByEmail(email);
+  }
 
-    // POST - '/accounts'
-    @PostMapping
-    public String createAccount(String name, Integer cpf, String email) {
-        return userService.createUser(name, cpf, email);
-    }
+  // POST - '/accounts'
+  @PostMapping
+  public String createUser(String name, String email, String cpf) {
+    return userService.createUser(name, email, cpf);
+  }
 }

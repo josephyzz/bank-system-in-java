@@ -7,20 +7,25 @@ import com.two.bank_system.domain.User;
 
 @Service
 public class UserService {
-    private final UserRepository userRepository;
+  private final UserRepository userRepository;
 
-    public String getUserByEmail(String email) {
-        User user = userRepository.findUserByEmail(email);
-        return "Your User";
+  // Dependency Injection, entrega um repo pronto para uso.
+  public UserService(UserRepository userRepository) {
+    this.userRepository = userRepository;
+  }
+
+  public User getUserByEmail(String email) {
+    return userRepository.findByEmail(email)
+        .orElseThrow(() -> new RuntimeException("Usuário não encontrado"));
+  }
+
+  public String createUser(String name, String email, String cpf) {
+    User user;
+    if (cpf == null) {
+      user = new User(name, email);
+    } else {
+      user = new User(name, email, cpf);
     }
-    public String createUser(String name, String email, Integer cpf)
-    {
-        User user = (cpf != null && !cpf.isEmpty()) ? new User(name, email, cpf) : new User(name, email);
-        return "User Created: " + user.getName() + " with email: " + user.getEmail();
-    }
-    
-    public String changeEmail(String name, String newEmail) {
-        // user.setEmail(newEmail);
-        return "Email changed for user: " + name + " to new email: " + newEmail;
-    }
+    return "User Created: " + user.getName() + " with email: " + user.getEmail();
+  }
 }
